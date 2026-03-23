@@ -127,8 +127,8 @@ export default function SetupPage() {
         await pb.collection("_superusers").authWithPassword(email, password);
       } catch {
         // Fallback to old admins API (PocketBase v0.22)
-        // @ts-expect-error legacy API
-        await pb.admins.authWithPassword(email, password);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await (pb as any).admins.authWithPassword(email, password);
       }
       addLog("Connecté ✓");
     } catch (e) {
